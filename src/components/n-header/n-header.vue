@@ -30,13 +30,14 @@
             padding-left 15px
         .title
             flex 1
-            font-size $font-size-title
+            font-size $font-size-title-l
             .text
                 display inline-block
-                vertical-align top
+                vertical-align bottom
                 margin-left 18px
             .icon 
-                margin-left 8px
+                margin-left 4px
+                font-size $font-size-text
         .search
             flex 0 0 40px
             padding-right 15px
