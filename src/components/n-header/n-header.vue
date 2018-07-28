@@ -18,6 +18,7 @@
 
 <style lang="stylus">
     @import "~common/stylus/variable"
+    
     .n-header
         display flex
         height 60px

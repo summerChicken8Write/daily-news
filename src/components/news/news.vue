@@ -1,15 +1,21 @@
 <template>
     <div class="news">
-        news
+        <swiper :hotSpot="hotSpot"></swiper>
     </div>
 </template>
 
 <script>
     import {getNews} from 'api/getNews'
+    import Swiper from 'base/swiper/swiper'
 
     const SUCCESS = 'success'
 
     export default {
+        data() {
+            return {
+                hotSpot: []
+            }
+        },
         created() {
             this._getNews()
         },
@@ -17,10 +23,14 @@
             _getNews() {
                 getNews().then((res) => {
                     if(res.message === SUCCESS) {
-                        console.log(res.data)
+                        this.hotSpot = res.data.pc_feed_focus
+                        console.log(this.hotSpot)
                     }
                 })
             },
+        },
+        components: {
+            Swiper,
         },
     }
 </script>
