@@ -2,7 +2,7 @@
     <div class="swiper">
         <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
-            <swiper-slide class="swiper-item" v-for="item in hotSpot">
+            <swiper-slide class="swiper-item" v-for="(item, index) in hotSpot" :key="index">
                 <img :src="item.image_url" alt="">
                 <div class="title-wrapper">
                     <h1 class="title">{{item.title}}</h1>
