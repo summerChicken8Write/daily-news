@@ -1,5 +1,5 @@
 <template>
-    <div class="swiper">
+    <div class="swiper" v-if="hotSpot.length">
         <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
             <swiper-slide class="swiper-item" v-for="(item, index) in hotSpot" :key="index">
@@ -20,6 +20,8 @@
 <script>
     import 'swiper/dist/css/swiper.css'
     import {swiper, swiperSlide} from 'vue-awesome-swiper'
+    // import Swiper from 'vue-awesome-swiper'
+    // import SwiperSlide from 'vue-awesome-swiper'
 
     export default {
         props: {
@@ -74,7 +76,7 @@
         mounted() {
         // current swiper instance
         // 然后你就可以使用当前上下文内的swiper对象去做你想做的事了
-        console.log('this is current swiper instance object', this.swiper)
+            // console.log('this is current swiper instance object', this.swiper)  // 这段代码会报错
         },
         components: {
             swiper,
