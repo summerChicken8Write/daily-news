@@ -38,16 +38,14 @@
                 getRollNews().then((res) => {
                     if(res.message === SUCCESS) {
                         this.hotSpot = res.data.pc_feed_focus
-                        console.log(this.hotSpot)
+                        // console.log(this.hotSpot)
                     }
                 })
             },
             _getAllNews() {
                 getAllNews().then((res) => {
-                    if(res.message === SUCCESS) {
-                        this.allNews = res.data
-                        // console.log(this.allNews)
-                    }
+                    console.log(res.data)
+                    this.allNews = res.data
                 })
             },
         },
@@ -59,5 +57,13 @@
 </script>
 
 <style lang="stylus">
-
+    .news
+        position fixed
+        width 100%
+        top 100px
+        bottom 0
+        .swiper-wrapper
+            position relative
+            width 100%
+            overflow hidden
 </style>
