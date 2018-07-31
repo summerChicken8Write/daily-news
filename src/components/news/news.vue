@@ -1,36 +1,53 @@
 <template>
     <div class="news">
-        <swiper :hotSpot="hotSpot"></swiper>
+        <div class="swiper-wrapper">
+            <swiper :hotSpot="hotSpot"></swiper>
+        </div>
+        <div class="news-wrapper">
+            <news-list></news-list>
+        </div>
     </div>
 </template>
 
 <script>
-    import {getNews} from 'api/getNews'
+    import {getRollNews, getAllNews} from 'api/getNews'
     import Swiper from 'base/swiper/swiper'
+    import NewsList from 'components/news-list/news-list'
 
     const SUCCESS = 'success'
 
     export default {
         data() {
             return {
-                hotSpot: []
+                hotSpot: [],
+                allNews: []
             }
         },
         created() {
-            this._getNews()
+            this._getRollNews()
+            this._getAllNews()
         },
         methods: {
-            _getNews() {
-                getNews().then((res) => {
+            _getRollNews() {
+                getRollNews().then((res) => {
                     if(res.message === SUCCESS) {
                         this.hotSpot = res.data.pc_feed_focus
-                        console.log(this.hotSpot)
+                        // console.log(this.hotSpot)
+                    }
+                })
+            },
+            _getAllNews() {
+                getAllNews().then((res) => {
+                    if(res.message === SUCCESS) {
+                        this.allNews = res.data
+                        console.log(this.allNews)
                     }
                 })
             },
         },
         components: {
             Swiper,
+            NewsList
         },
     }
 </script>

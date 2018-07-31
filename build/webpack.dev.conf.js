@@ -47,7 +47,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
     // webpack内置的devServer，设置 before()
     before (app) {
-      app.get('/api/getNews', function (req, res) {
+      app.get('/api/getRollNews', function (req, res) {
         const url = 'https://www.toutiao.com/api/pc/focus/'
         axios.get(url, {
           header: {
@@ -58,7 +58,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         }).catch((e) => {
           console.log(e)
         })
-      })
+      });
     }
   },
   plugins: [

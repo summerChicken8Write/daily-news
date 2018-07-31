@@ -60,11 +60,11 @@
                     //     hideOnClick: true,
                     // },
                     // 滚动条
-                    scrollbar: {
-                        el: '.swiper-scrollbar',
-                        hide: true,
-                        draggable: true,
-                    },
+                    // scrollbar: {
+                    //     el: '.swiper-scrollbar',
+                    //     hide: true,
+                    //     draggable: true,
+                    // },
                 },
             }
         },
@@ -93,8 +93,8 @@
             position reletive
             img
                 display block
-                height 200px
                 width 100%
+                height 60%
             .title-wrapper
                 position absolute
                 left 0
