@@ -1,7 +1,13 @@
 <template>
     <div class="news">
         <div class="swiper-wrapper">
-            <swiper :hotSpot="hotSpot"></swiper>
+            <slider>
+                <div v-for="item in hotSpot">
+                    <span href="">
+                        <img :src="item.image_url" alt="">
+                    </span>
+                </div>
+            </slider>
         </div>
         <div class="news-wrapper">
             <news-list></news-list>
@@ -11,7 +17,7 @@
 
 <script>
     import {getRollNews, getAllNews} from 'api/getNews'
-    import Swiper from 'base/swiper/swiper'
+    import Slider from 'base/slider/slider'
     import NewsList from 'components/news-list/news-list'
 
     const SUCCESS = 'success'
@@ -32,7 +38,7 @@
                 getRollNews().then((res) => {
                     if(res.message === SUCCESS) {
                         this.hotSpot = res.data.pc_feed_focus
-                        // console.log(this.hotSpot)
+                        console.log(this.hotSpot)
                     }
                 })
             },
@@ -40,13 +46,13 @@
                 getAllNews().then((res) => {
                     if(res.message === SUCCESS) {
                         this.allNews = res.data
-                        console.log(this.allNews)
+                        // console.log(this.allNews)
                     }
                 })
             },
         },
         components: {
-            Swiper,
+            Slider,
             NewsList
         },
     }
