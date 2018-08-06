@@ -3,11 +3,16 @@
         <scroll class="news-content" ref="scroll" :data="allNews">
             <div>
                 <div class="swiper-wrapper" v-if="hotSpot.length">
-                    <slider>
+                    <slider :theDots="false">
                         <div v-for="item in hotSpot">
-                            <span href="">
-                                <img :src="item.image_url" @load="loadImage">
-                            </span>
+                            <div class="title-wrapper">
+                                <h1 class="title">
+                                    <span href="">
+                                        {{item.title}}
+                                    </span>
+                                </h1>
+                            </div>
+                            <img :src="item.image_url" @load="loadImage">
                         </div>
                     </slider>
                 </div>
@@ -49,13 +54,13 @@
                 getRollNews().then((res) => {
                     if(res.message === SUCCESS) {
                         this.hotSpot = res.data.pc_feed_focus
-                        // console.log(this.hotSpot)
+                        console.log(this.hotSpot)
                     }
                 })
             },
             _getAllNews() {
                 getAllNews().then((res) => {
-                    console.log(res.data)
+                    // console.log(res.data)
                     this.allNews = res.data
                 })
             },
@@ -83,4 +88,17 @@
                 position relative
                 width 100%
                 overflow hidden
+                .title-wrapper
+                    width 100%
+                    height 30px
+                    line-height 30px
+                    background linear-gradient(to left, rgba(7, 17, 27, 0.3), rgba(7, 17, 27, 0.01))
+                    .title
+                        box-sizing border-box
+                        color $color-text
+                        width 100%
+                        padding 0 10px
+                        text-align right
+                        overflow hidden
+                        text-overflow ellipsis
 </style>

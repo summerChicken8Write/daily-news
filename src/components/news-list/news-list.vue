@@ -2,15 +2,20 @@
     <div class="news-list">
         <div class="news-content">
             <div class="news-item" v-for="item in allNews">
-                <div class="text">
+                <div class="content">
                     <h1 class="title">{{item.title}}</h1>
+                    <div class="image-list" v-if="item.has_image && item.image_list.length > 0">
+                        <div class="image-item" v-for="image in item.image_list">
+                            <img :src="image.url" alt="">
+                        </div>
+                    </div>
                     <div class="desc">
                         <span class="label" v-if="item.label">{{item.label}}</span>
                         <span class="source">{{item.source}}</span>
                         <span class="comment">评论&nbsp{{item.comment_count}}</span>
                     </div>
                 </div>
-                <div class="image-wrapper" v-if="item.has_image">
+                <div class="image-wrapper" v-if="item.has_image && item.image_url">
                     <img :src="item.image_url">
                 </div>
             </div>
@@ -40,13 +45,23 @@
                 margin 20px 10px 0px 10px
                 padding-bottom 20px
                 border-bottom 1px solid $color-border
-                .text
+                .content
                     flex 1
                     .title
                         margin-bottom 10px
                         line-height 20px
                         font-size $font-size-title
                         color $color-text
+                    .image-list
+                        display flex
+                        width 100%
+                        .image-item
+                            flex 1
+                            margin-right 3px
+                            &:last-child
+                                margin-right 0
+                            img 
+                                width 100%
                     .desc
                         font-size $font-size-small
                         color $color-desc
