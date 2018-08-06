@@ -20,6 +20,9 @@
                     <news-list :allNews="allNews"></news-list>
                 </div>
             </div>
+            <div class="loading-container" v-show="!allNews.length">
+                <loading></loading>
+            </div>
         </scroll>
     </div>
 </template>
@@ -28,6 +31,7 @@
     import {getRollNews, getAllNews} from 'api/getNews'
     import Slider from 'base/slider/slider'
     import Scroll from 'base/scroll/scroll'
+    import Loading from 'base/loading/loading'
     import NewsList from 'components/news-list/news-list'
 
     const SUCCESS = 'success'
@@ -68,7 +72,8 @@
         components: {
             Slider,
             NewsList,
-            Scroll
+            Scroll,
+            Loading
         },
     }
 </script>
@@ -101,4 +106,9 @@
                         text-align right
                         overflow hidden
                         text-overflow ellipsis
+            .loading-container
+                position: absolute
+                width: 100%
+                top: 50%
+                transform: translateY(-50%)
 </style>
