@@ -4,7 +4,7 @@
             <slot>
             </slot>
         </div>
-        <div class="dots">
+        <div class="dots" v-if="showDots">
             <span class="dot" v-for="(item, index) in dots" :class="{active: currentPageIndex === index}"></span>
         </div>
     </div>
@@ -34,6 +34,10 @@
                 type: Number,
                 default: 2000,
             },
+            theDots: {
+                type: Boolean,
+                default: true,
+            }
         },
         mounted() {
             setTimeout(() => {
@@ -111,6 +115,11 @@
                     this.slider.next(400)  
                 }, this.interval)
             },
+        },
+        computed: {
+            showDots() {
+                return this.theDots
+            }
         },
         destroyed() {
             clearTimeout(this.timer)
