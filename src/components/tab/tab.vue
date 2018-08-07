@@ -1,16 +1,16 @@
 <template>
     <div class="tab">
-        <router-link tag="div" class="tab-item" to="/news">
-            <span class="tab-link" @click="moveToNews">
+        <div class="tab-item" @click="moveToNews">
+            <span class="tab-link">
                 热门新闻
                 <span class="active-line" ref="activeLine"></span>
             </span>
-        </router-link>
-        <router-link tag="div" class="tab-item" to="/videos">
-            <span class="tab-link" @click="moveToVideo">
+        </div>
+        <div class="tab-item" @click="moveToVideo">
+            <span class="tab-link">
                 新鲜视频
             </span>
-        </router-link>
+        </div>
     </div>
 </template>
 
@@ -20,6 +20,9 @@
     export default {
         methods: {
             moveToVideo(el, done) {
+                //跳转路由
+                this.$router.push({path:'/news'})
+                
                 // 配置移动距离
                 const x = window.innerWidth / 2
 
@@ -50,6 +53,8 @@
                 animations.runAnimation(this.$refs.activeLine, 'moveToVideo', done)
             },
             moveToNews(el, done) {
+                this.$router.push({path:'/videos'})
+                
                 const x = window.innerWidth / 2
 
                 let animation = {
