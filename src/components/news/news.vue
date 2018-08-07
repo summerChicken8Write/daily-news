@@ -1,6 +1,6 @@
 <template>
     <div class="news">
-        <scroll class="news-content" ref="scroll" :data="allNews">
+        <scroll class="news-content" ref="scroll" :data="allNews" :pullup="pullup" @scrollToEnd="searchMore">
             <div>
                 <div class="swiper-wrapper" v-if="hotSpot.length">
                     <slider :theDots="false">
@@ -40,7 +40,8 @@
         data() {
             return {
                 hotSpot: [],
-                allNews: []
+                allNews: [],
+                pullup: true,
             }
         },
         created() {
@@ -54,6 +55,11 @@
                     this.loadchecked = true
                 }
             },
+            searchMore() {
+                getAllNews().then((res) => {
+                    this.allNews = this.allNews.concat(res.data)
+                })
+            },
             _getRollNews() {
                 getRollNews().then((res) => {
                     if(res.message === SUCCESS) {
@@ -66,6 +72,7 @@
                 getAllNews().then((res) => {
                     // console.log(res.data)
                     this.allNews = res.data
+                    // this.allNews = this.allNews.concat(res.data)
                 })
             },
         },

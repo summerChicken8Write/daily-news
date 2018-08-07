@@ -22,14 +22,17 @@ export function getAllNews () {
   //   _signature: 'ckTLCBAXKSclc4NTEMAfB3JEyx'
   // })
 
+  const time = parseInt((new Date().getTime()) / 1000)
+
   const data = Object.assign({}, {
-    tag: '__all__',
+    tag: 'news_hot',
     ac: 'wap',
-    count: 15,
+    count: 20,
     format: 'json_raw',
     as: 'A17538D54D106FF',
     cp: '585DF0A65F0F1E1',
-    min_behot_time: 1482491618
+    min_behot_time: time,
+    i: time
   })
 
   return axios.get(url, {

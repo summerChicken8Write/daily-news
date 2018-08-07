@@ -19,18 +19,24 @@
                     <img :src="item.image_url">
                 </div>
             </div>
+            <loading title=""></loading>
         </div>
     </div>
 </template>
 
 <script>
+    import Loading from 'base/loading/loading'
+
     export default {
         props: {
             allNews: {
                 type: Array,
                 default: []
             }
-        }
+        },
+        components: {
+            Loading
+        },
     }
 </script>
 
