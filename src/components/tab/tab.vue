@@ -21,7 +21,7 @@
         methods: {
             moveToVideo(el, done) {
                 //跳转路由
-                this.$router.push({path:'/news'})
+                this.$router.push({path:'/videos'})
                 
                 // 配置移动距离
                 const x = window.innerWidth / 2
@@ -53,7 +53,7 @@
                 animations.runAnimation(this.$refs.activeLine, 'moveToVideo', done)
             },
             moveToNews(el, done) {
-                this.$router.push({path:'/videos'})
+                this.$router.push({path:'/news'})
                 
                 const x = window.innerWidth / 2
 
