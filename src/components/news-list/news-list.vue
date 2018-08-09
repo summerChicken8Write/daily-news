@@ -6,7 +6,7 @@
                     <h1 class="title">{{item.title}}</h1>
                     <div class="image-list" v-if="item.has_image && item.image_list.length > 0">
                         <div class="image-item" v-for="image in item.image_list">
-                            <img :src="image.url" alt="">
+                            <img v-lazy="image.url" alt="">
                         </div>
                     </div>
                     <div class="desc">
@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="image-wrapper" v-if="item.has_image && item.image_url">
-                    <img :src="item.image_url">
+                    <img v-lazy="item.image_url">
                 </div>
             </div>
             <loading title=""></loading>
