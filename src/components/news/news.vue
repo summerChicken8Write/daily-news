@@ -16,14 +16,14 @@
                         </div>
                     </slider>
                 </div>
-                <div class="news-wrapper">
+                <div class="news-wrapper" v-show="allNews.length">
                     <news-list :allNews="allNews"></news-list>
                 </div>
             </div>
-            <div class="loading-container" v-show="!allNews.length">
-                <loading></loading>
-            </div>
         </scroll>
+        <div class="loading-container" v-show="!allNews.length">
+            <loading></loading>
+        </div>
     </div>
 </template>
 
@@ -46,6 +46,9 @@
         },
         created() {
             this._getRollNews()
+            // setTimeout(() => {
+            //     this._getAllNews()
+            // }, 5000)
             this._getAllNews()
         },
         methods: {
@@ -113,9 +116,9 @@
                         text-align right
                         overflow hidden
                         text-overflow ellipsis
-            .loading-container
-                position: absolute
-                width: 100%
-                top: 50%
-                transform: translateY(-50%)
+        .loading-container
+            position: absolute
+            width: 100%
+            top: 50%
+            transform: translateY(-50%)
 </style>
