@@ -8,7 +8,7 @@ export function getVideos () {
   const data = Object.assign({}, {
     tag: 'video',
     ac: 'wap',
-    count: 20,
+    count: 8,
     format: 'json_raw',
     as: 'A17538D54D106FF',
     cp: '585DF0A65F0F1E1',
