@@ -6,9 +6,9 @@
                     <div class="title">
                         <h1>{{item.title}}</h1>
                     </div>
+                    <span class="icon"></span>
                     <div class="image-wrapper">
                         <img v-lazy="item.large_image_url" alt="">
-                        <span class="icon"></span>
                     </div>
                     <div class="desc">
                         <span class="source">{{item.source}}</span>
@@ -80,6 +80,37 @@
                     color $color-title
                     font-size $font-size-title
                     background linear-gradient(to bottom, rgba(7, 17, 27, 0.75), rgba(7, 17, 27, 0.05))
+                // 制作一个带边框的三角形图标
+                .icon
+                    position absolute
+                    top 50%
+                    left 50%
+                    display inline-block
+                    width 50px
+                    height 50px
+                    transform: translate(-50%, -70%)
+                    border-radius 50%
+                    background $color-dot
+                    &:before
+                        position absolute
+                        top 50%
+                        left 55%
+                        display inline-block
+                        transform: translate(-50%, -50%)
+                        content: ''
+                        border-top 15px solid transparent
+                        border-left 20px solid $color-border
+                        border-bottom 15px solid transparent
+                    &:after
+                        position absolute
+                        top 19%
+                        left 33%
+                        display inline-block
+                        content: ''
+                        border-top 15px solid transparent
+                        border-left 20px solid $color-background
+                        border-bottom 15px solid transparent
+                        transform scale(0.85)
                 .image-wrapper
                     img
                         width 100%

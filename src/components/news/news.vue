@@ -12,6 +12,7 @@
                                     </span>
                                 </h1>
                             </div>
+                            <!-- 轮播图的高度由图片撑开，在图片加载完成之后调用refresh方法 -->
                             <img :src="item.image_url" @load="loadImage">
                         </div>
                     </slider>
@@ -53,6 +54,7 @@
         },
         methods: {
             loadImage() {
+                // 只需调用一次，使用loadchecked作为标记位
                 if(!this.loadchecked) {
                     this.$refs.scroll.refresh()
                     this.loadchecked = true
