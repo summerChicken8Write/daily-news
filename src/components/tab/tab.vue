@@ -91,6 +91,7 @@
         height 40px
         line-height 40px
         text-align center
+        background $color-border
         .tab-item
             flex 1
             border-right 1px solid $color-desc
