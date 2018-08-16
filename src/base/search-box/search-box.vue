@@ -7,6 +7,8 @@
 </template>
 
 <script>
+    import {debounce} from 'common/js/util'
+
     export default {
         props: {
             placeholder: {
@@ -34,11 +36,10 @@
             }
         },
         created() {
-            this.$watch('query', 
-                function(newQuery) {
-                    this.$emit('query', newQuery)
-                }
-            )
+            // 限制刷新时间，减少请求次数
+            this.$watch('query', debounce((newQuery) => {
+                this.$emit('query', newQuery)
+            }, 200))
         },
     }
 </script>
