@@ -8,16 +8,24 @@
             <i class="icon icon-spinner11"></i>
         </div>
         <div class="search">
-            <i class="icon icon-search"></i>
+            <i class="icon icon-search" @click="toSearch"></i>
         </div>
     </div>
 </template>
 
 <script>
+    export default {
+        methods: {
+            toSearch() {
+                this.$router.push({path:'/search'})
+            }
+        }
+    }
 </script>
 
-<style lang="stylus">
+<style scoped lang="stylus">
     @import "~common/stylus/variable"
+    @import "~common/stylus/mixin"
     
     .n-header
         display flex

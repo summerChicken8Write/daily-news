@@ -59,6 +59,18 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           console.log(e)
         })
       });
+      app.get('/api/getHotKey', function (req, res) {
+        const url = 'https://m.toutiao.com/baidu_top_words/?csrfmiddlewar'
+        axios.get(url, {
+          header: {
+            referer: 'https://m.toutiao.com/search/?need_open_window=1'
+          }
+        }).then((response) => {
+          res.json(response.data)
+        }).catch((e) => {
+          console.log(e)
+        })
+      });
     }
   },
   plugins: [
