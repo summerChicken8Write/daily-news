@@ -102,6 +102,7 @@
             bottom 0
             left 0
             right 0
+            background $color-title
             .header
                 position relative
                 height 60px
@@ -116,6 +117,7 @@
                     font-size $font-size-title
             .search-wrapper
                 height 40px
+                margin-bottom 20px
                 line-height 40px
                 background $color-background-g
             .shortcut-wrapper
