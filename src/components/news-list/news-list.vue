@@ -4,8 +4,8 @@
             <div class="news-item" v-for="item in allNews">
                 <div class="content">
                     <h1 class="title">{{item.title}}</h1>
-                    <div class="image-list" v-if="item.has_image && item.image_list.length > 0">
-                        <div class="image-item" v-for="image in item.image_list">
+                    <div class="image-list" v-if="item.has_image && item.image_list.length >= 3">
+                        <div class="image-item" v-for="image in item.image_list.slice(0, 3)">
                             <img v-lazy="image.url" alt="">
                         </div>
                     </div>
@@ -15,7 +15,7 @@
                         <span class="comment">评论&nbsp{{item.comment_count}}</span>
                     </div>
                 </div>
-                <div class="image-wrapper" v-if="item.has_image && item.image_url">
+                <div class="image-wrapper" v-if="item.has_image && item.image_url && item.image_list.length < 3">
                     <img v-lazy="item.image_url">
                 </div>
             </div>
@@ -28,10 +28,15 @@
     import Loading from 'base/loading/loading'
 
     export default {
+        data() {
+            return {
+                imageList: []
+            }
+        },
         props: {
             allNews: {
                 type: Array,
-                default: []
+                default: [],
             }
         },
         components: {
