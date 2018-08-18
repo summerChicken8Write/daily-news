@@ -43,6 +43,7 @@
                 hotSpot: [],
                 allNews: [],
                 pullup: true,
+                offset: 0
             }
         },
         created() {
@@ -61,7 +62,8 @@
                 }
             },
             searchMore() {
-                getAllNews().then((res) => {
+                this.offset += 10
+                getAllNews(this.offset).then((res) => {
                     this.allNews = this.allNews.concat(res.data)
                 })
             },
@@ -69,15 +71,15 @@
                 getRollNews().then((res) => {
                     if(res.message === SUCCESS) {
                         this.hotSpot = res.data.pc_feed_focus
-                        console.log(this.hotSpot)
+                        // console.log(this.hotSpot)
                     }
                 })
             },
             _getAllNews() {
-                getAllNews().then((res) => {
-                    // console.log(res.data)
+                this.offset = 0
+                getAllNews(this.offset).then((res) => {
                     this.allNews = res.data
-                    // this.allNews = this.allNews.concat(res.data)
+                    // console.log(res)
                 })
             },
         },

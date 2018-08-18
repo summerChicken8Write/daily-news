@@ -9,7 +9,7 @@ export function getRollNews () {
     })
 }
 
-export function getAllNews () {
+export function getAllNews (offset) {
   const url = '/api/list/'
 
   // const data = Object.assign({}, {
@@ -25,9 +25,10 @@ export function getAllNews () {
   const time = parseInt((new Date().getTime()) / 1000)
 
   const data = Object.assign({}, {
+    offset: offset,
     tag: 'news_hot',
     ac: 'wap',
-    count: 20,
+    count: 10,
     format: 'json_raw',
     as: 'A17538D54D106FF',
     cp: '585DF0A65F0F1E1',

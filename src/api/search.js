@@ -8,11 +8,11 @@ export function getHotKey () {
   })
 }
 
-export function search (query) {
+export function search (query, offset) {
   const url = '/api/search_content/'
 
   const data = Object.assign({}, {
-    offset: 0,
+    offset: offset,
     format: 'json',
     keyword: query,
     autoload: 'true',
