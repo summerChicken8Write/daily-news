@@ -6,7 +6,7 @@
                 <h1 class="title">搜索</h1>
             </div>
             <div class="search-wrapper">
-                <search-box @query="onQueryChange"></search-box>
+                <search-box @query="onQueryChange" @search="_search"></search-box>
             </div>
             <div class="shortcut-wrapper" v-show="!query">
                 <div class="hot-key">
@@ -21,9 +21,9 @@
                     search-history
                 </div>
             </div>
-            <div class="search-result" v-show="query">
+            <scroll class="search-result" ref="searchResult" v-show="query" :data="result" :pullup="pullup" @scrollToEnd="searchMore">
                 <news-list :allNews="result"></news-list>
-            </div>
+            </scroll>
         </div>
     </transition>
 </template>
@@ -33,13 +33,16 @@
     import {search} from 'api/search'
     import SearchBox from 'base/search-box/search-box'
     import NewsList from 'components/news-list/news-list'
+    import Scroll from 'base/scroll/scroll'
 
     export default {
         data() {
             return {
                 hotKey: [],
                 query: '',
-                result: []
+                result: [],
+                offset: 0,
+                pullup: true
             }
         },
         created() {
@@ -52,15 +55,23 @@
             onQueryChange(newQuery) {
                 this.query = newQuery
             },
+            searchMore() {
+                this.offset += 10 
+                search(this.query, this.offset).then((res) => {
+                    this.result = this.result.concat(res.data)
+                    console.log(this.result)
+                })
+            },
             _getHotkey() {
                 getHotKey().then((res) => {
                     this.hotKey = res.data
                 })
             },
             _search() {
-                search(this.query).then((res) => {
+                this.offset = 0
+                this.$refs.searchResult.scrollTo(0, 0)
+                search(this.query, this.offset).then((res) => {
                     this.result = res.data
-                    console.log(this.result)
                 })
             },
         },
@@ -71,7 +82,8 @@
         },
         components: {
             SearchBox,
-            NewsList
+            NewsList,
+            Scroll
         },
     }
 </script>
@@ -106,18 +118,22 @@
                 height 40px
                 line-height 40px
                 background $color-background-g
-            .hot-key
-                margin 15px 7px
-                text-align center
-                .title
-                    margin-bottom 10px
-                    font-size $font-size-title
-                .item
-                    display inline-block
-                    margin-right 6px
-                    margin-bottom 15px
-                    padding 6px 5px
-                    background $color-border
-                    font-size $font-size-text
+            .shortcut-wrapper
+                .hot-key
+                    margin 15px 7px
+                    text-align center
+                    .title
+                        margin-bottom 10px
+                        font-size $font-size-title
+                    .item
+                        display inline-block
+                        margin-right 6px
+                        margin-bottom 15px
+                        padding 6px 5px
+                        background $color-border
+                        font-size $font-size-text
+            .search-result
+                height 100%
+                overflow hidden
 </style>
 
