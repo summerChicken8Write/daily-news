@@ -1,5 +1,7 @@
+import {loadSearch} from 'common/js/cache'
+
 const state = {
-  query: ''
+  searchHistory: loadSearch()
 }
 
 export default state
