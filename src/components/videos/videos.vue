@@ -1,6 +1,6 @@
 <template>
     <div class="videos">
-        <scroll class="videos-content" :data="videos" :pullup="pullup" @scrollToEnd="searchMore">
+        <scroll class="videos-content" :data="videos" :pullup="pullup" @scrollToEnd="searchMore" v-show="videos.length">
             <div>
                 <div class="videos-item" v-for="item in videos">
                     <div class="title">
@@ -18,6 +18,9 @@
                 <loading title=""></loading>
             </div>
         </scroll>
+        <div class="loading-container" v-show="!videos.length">
+            <loading></loading>
+        </div>
     </div>
 </template>
 
@@ -118,4 +121,9 @@
                     margin-top 9px
                     font-size $font-size-small
                     color $color-desc
+        .loading-container
+            position: absolute
+            width: 100%
+            top: 50%
+            transform: translateY(-50%)
 </style>
