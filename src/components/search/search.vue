@@ -6,7 +6,7 @@
                 <h1 class="title">搜索</h1>
             </div>
             <div class="search-wrapper">
-                <search-box @query="onQueryChange" @search="_search"></search-box>
+                <search-box @query="onQueryChange" @search="_search" ref="searchBox"></search-box>
             </div>
             <div class="shortcut-wrapper" v-show="!query">
                 <div class="hot-key">
@@ -18,7 +18,8 @@
                     </ul>
                 </div>
                 <div class="search-history">
-                    search-history
+                    <h1 class="title">搜索历史：</h1>
+                    <search-list :searchHistory="searchHistory" @select="addQuery"></search-list>
                 </div>
             </div>
             <scroll class="search-result" ref="searchResult" v-show="query" :data="result" :pullup="pullup" @scrollToEnd="searchMore">
@@ -34,6 +35,8 @@
     import SearchBox from 'base/search-box/search-box'
     import NewsList from 'components/news-list/news-list'
     import Scroll from 'base/scroll/scroll'
+    import SearchList from 'base/search-list/search-list'
+    import {mapGetters, mapActions} from 'vuex'
 
     export default {
         data() {
@@ -42,8 +45,13 @@
                 query: '',
                 result: [],
                 offset: 0,
-                pullup: true
+                pullup: true,
             }
+        },
+        computed: {
+            ...mapGetters([
+                'searchHistory'
+            ])
         },
         created() {
             this._getHotkey()
@@ -51,6 +59,9 @@
         methods: {
             back() {
                 this.$router.back()
+            },
+            addQuery(query) {
+                this.$refs.searchBox.setQuery(query)
             },
             onQueryChange(newQuery) {
                 this.query = newQuery
@@ -73,17 +84,22 @@
                 search(this.query, this.offset).then((res) => {
                     this.result = res.data
                 })
+                this.saveSearchHistory(this.query)
             },
+            ...mapActions([
+                'saveSearchHistory'
+            ]),
         },
         watch: {
-            query() {
+            query(newQuery) {
                 this._search()
             }
         },
         components: {
             SearchBox,
             NewsList,
-            Scroll
+            Scroll,
+            SearchList
         },
     }
 </script>
@@ -134,6 +150,12 @@
                         padding 6px 5px
                         background $color-border
                         font-size $font-size-text
+                .search-history
+                    margin 0 25px
+                    .title
+                        margin-bottom 10px
+                        text-align center
+                        font-size $font-size-title
             .search-result
                 height 100%
                 overflow hidden
