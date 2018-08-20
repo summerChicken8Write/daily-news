@@ -19,7 +19,7 @@
                 </div>
                 <div class="search-history">
                     <h1 class="title">搜索历史：</h1>
-                    <search-list :searchHistory="searchHistory" @select="addQuery"></search-list>
+                    <search-list :searchHistory="searchHistory" @select="addQuery" @delete="deleteSearchHistory"></search-list>
                 </div>
             </div>
             <scroll class="search-result" ref="searchResult" v-show="query" :data="result" :pullup="pullup" @scrollToEnd="searchMore">
@@ -73,6 +73,9 @@
                     console.log(this.result)
                 })
             },
+            test(item) {
+                console.log(item)
+            },
             _getHotkey() {
                 getHotKey().then((res) => {
                     this.hotKey = res.data
@@ -87,7 +90,8 @@
                 this.saveSearchHistory(this.query)
             },
             ...mapActions([
-                'saveSearchHistory'
+                'saveSearchHistory',
+                'deleteSearchHistory'
             ]),
         },
         watch: {

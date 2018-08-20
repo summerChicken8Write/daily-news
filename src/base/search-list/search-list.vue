@@ -4,11 +4,11 @@
             <li v-for="item in searchHistory" @click="selectItem(item)" v-show="item.length">
                 <span>{{item}}</span>
                 <span class="icon">
-                    <i class="icon icon-close"></i>
+                    <i class="icon icon-close" @click.stop="deleteOne(item)"></i>
                 </span>
             </li>
         </ul>
-        <div class="clear">
+        <div class="clear" @click="clearSearchHistory">
             <i class="icon icon-bin"></i>
             <span>清空全部记录</span>
         </div>
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
+
     export default {
         props: {
             searchHistory: {
@@ -26,7 +28,13 @@
         methods: {
             selectItem(item) {
                 this.$emit('select', item)
-            }
+            },
+            deleteOne(item) {
+                this.$emit('delete', item)
+            },
+            ...mapActions([
+                'clearSearchHistory'
+            ])
         }
     }
 </script>
