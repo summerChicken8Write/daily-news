@@ -73,9 +73,6 @@
                     console.log(this.result)
                 })
             },
-            test(item) {
-                console.log(item)
-            },
             _getHotkey() {
                 getHotKey().then((res) => {
                     this.hotKey = res.data

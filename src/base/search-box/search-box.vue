@@ -39,7 +39,7 @@
             // 限制刷新时间，减少请求次数
             this.$watch('query', debounce((newQuery) => {
                 this.$emit('query', newQuery)
-            }, 200))
+            }, 600))
         },
     }
 </script>
