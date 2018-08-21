@@ -18,13 +18,14 @@
                     </slider>
                 </div>
                 <div class="news-wrapper" v-show="allNews.length">
-                    <news-list :allNews="allNews"></news-list>
+                    <news-list :allNews="allNews" @select="selectNews"></news-list>
                 </div>
             </div>
         </scroll>
         <div class="loading-container" v-show="!allNews.length">
             <loading></loading>
         </div>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -61,6 +62,12 @@
                     this.loadchecked = true
                 }
             },
+            selectNews(item) {
+                console.log(item)
+                this.$router.push({
+                    path: `/news/${item.item_id}`
+                })
+            },
             searchMore() {
                 this.offset += 10
                 getAllNews(this.offset).then((res) => {
@@ -79,7 +86,7 @@
                 this.offset = 0
                 getAllNews(this.offset).then((res) => {
                     this.allNews = res.data
-                    // console.log(res)
+                    // console.log(res.data)
                 })
             },
         },

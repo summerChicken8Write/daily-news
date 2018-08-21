@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import News from 'components/news/news'
 import Videos from 'components/videos/videos'
 import Search from 'components/search/search'
+import NewsDetail from 'components/news-detail/news-detail'
 
 Vue.use(Router)
 
@@ -15,7 +16,13 @@ export default new Router({
     {
       path: '/news',
       name: 'news',
-      component: News
+      component: News,
+      children: [
+        {
+          path: ':id',
+          component: NewsDetail
+        }
+      ]
     },
     {
       path: '/videos',
@@ -25,7 +32,13 @@ export default new Router({
     {
       path: '/search',
       name: 'search',
-      component: Search
+      component: Search,
+      children: [
+        {
+          path: ':id',
+          component: NewsDetail
+        }
+      ]
     }
   ],
   linkActiveClass: 'active',

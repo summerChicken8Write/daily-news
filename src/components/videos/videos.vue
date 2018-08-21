@@ -48,7 +48,6 @@
             _getVideos() {
                 getVideos().then((res) =>{
                     this.videos = res.data
-                    console.log(res.data)
                 })
             },
         },

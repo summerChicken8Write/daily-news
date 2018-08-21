@@ -1,7 +1,7 @@
 <template>
     <div class="news-list">
         <div class="news-content">
-            <div class="news-item" v-for="item in allNews">
+            <div class="news-item" v-for="item in allNews" @click="selectNews(item)">
                 <div class="content">
                     <h1 class="title">{{item.title}}</h1>
                     <div class="image-list" v-if="item.has_image && item.image_list.length >= 3">
@@ -37,6 +37,11 @@
             allNews: {
                 type: Array,
                 default: [],
+            }
+        },
+        methods: {
+            selectNews(item) {
+                this.$emit('select', item)
             }
         },
         components: {
