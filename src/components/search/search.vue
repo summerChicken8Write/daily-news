@@ -18,7 +18,6 @@
                     </ul>
                 </div>
                 <div class="search-history">
-                    <h1 class="title">搜索历史：</h1>
                     <search-list :searchHistory="searchHistory" @select="addQuery" @delete="deleteSearchHistory"></search-list>
                 </div>
             </div>
@@ -84,6 +83,9 @@
                 search(this.query, this.offset).then((res) => {
                     this.result = res.data
                 })
+                if (this.query == '') {
+                    return
+                }
                 this.saveSearchHistory(this.query)
             },
             ...mapActions([
@@ -153,10 +155,6 @@
                         font-size $font-size-text
                 .search-history
                     margin 0 25px
-                    .title
-                        margin-bottom 10px
-                        text-align center
-                        font-size $font-size-title
             .search-result
                 height 100%
                 overflow hidden
