@@ -43,3 +43,18 @@ export function getAllNews (offset) {
       return Promise.resolve(res.data)
     })
 }
+
+export function getNewsDetail (id) {
+  const url = `/api/i${id}/info/`
+
+  const data = Object.assign({}, {
+    i: id
+  })
+
+  return axios.get(url, {
+    params: data
+  })
+    .then(res => {
+      return Promise.resolve(res.data)
+    })
+}

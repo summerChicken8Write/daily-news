@@ -18,7 +18,7 @@
                 default: true,
             },
             data: {
-                type: Array,
+                // type: Array,
                 default: null,
             },
             listenScroll: {

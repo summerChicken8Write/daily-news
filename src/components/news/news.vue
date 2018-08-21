@@ -35,6 +35,7 @@
     import Scroll from 'base/scroll/scroll'
     import Loading from 'base/loading/loading'
     import NewsList from 'components/news-list/news-list'
+    import {mapMutations} from 'vuex'
 
     const SUCCESS = 'success'
 
@@ -63,10 +64,10 @@
                 }
             },
             selectNews(item) {
-                console.log(item)
                 this.$router.push({
                     path: `/news/${item.item_id}`
                 })
+                this.setNews(item)
             },
             searchMore() {
                 this.offset += 10
@@ -86,9 +87,11 @@
                 this.offset = 0
                 getAllNews(this.offset).then((res) => {
                     this.allNews = res.data
-                    // console.log(res.data)
                 })
             },
+            ...mapMutations({
+                setNews: 'SET_NEWS'
+            })
         },
         components: {
             Slider,

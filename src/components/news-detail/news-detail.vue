@@ -1,15 +1,79 @@
 <template>
     <transition name="slider">
         <div class="news-detail">
-            news-detail
+            <scroll :data="newsData" class="news-content">
+                <div>
+                    <div class="news-heder">
+                        <i class="back" @click="back">back</i>
+                        <h1 class="title">{{this.news.title}}</h1>
+                    </div>
+                    <div class="desc">
+                        <div class="media">
+                            <img :src="mediaInfo.avatar_url" alt="" class="avatar">
+                            <h2 class="source">{{mediaInfo.screen_name}}</h2>
+                        </div>
+                        <div class="comments">{{newsData.comment_count}}评论</div>
+                        <div class="keyWords" v-for="item in keyWords">
+                            <span class="item">{{item}}</span>
+                        </div>
+                    </div>
+                    <div class="content" v-html="newsData.content"></div>
+                </div>
+            </scroll>
         </div>
     </transition>
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
+    import {getNewsDetail} from 'api/getNews'
+    import Scroll from 'base/scroll/scroll'
+
     export default {
+        data() {
+            return {
+                newsData: {},
+                mediaInfo: '',
+                keyWords: ''
+            }
+        },
         created() {
-            console.log()
+            this._getNewsDetail()
+        },
+        props: {
+            routerBack: {
+                type: String,
+                default: 'news'
+            }
+        },
+        computed: {
+            ...mapGetters([
+                'news'
+            ])
+        },
+        methods: {
+            back() {
+                this.$router.back()
+            },
+            _getNewsDetail() {
+                if (!this.news.item_id) {
+                    this.$router.push({
+                        path: `/${this.routerBack}`
+                    })
+                }
+                getNewsDetail(this.news.item_id).then((res) => {
+                    this.newsData = res.data
+                    this.mediaInfo = res.data.media_user
+                    this.keyWords = this._normalizeKeyWords(this.news.keywords)
+                    console.log(this.newsData)
+                })
+            },
+            _normalizeKeyWords(str) {
+                return str.split(",")
+            }
+        },
+        components: {
+            Scroll
         }
     }
 </script>
@@ -29,5 +93,8 @@
         left 0
         right 0
         background $color-title
+        .news-content
+            height: 100%
+            overflow: hidden
 </style>
 
