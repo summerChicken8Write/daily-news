@@ -1,7 +1,8 @@
 import {loadSearch} from 'common/js/cache'
 
 const state = {
-  searchHistory: loadSearch()
+  searchHistory: loadSearch(),
+  news: {}
 }
 
 export default state
