@@ -12,7 +12,7 @@
                 <div class="hot-key">
                     <h1 class="title">热门搜索：</h1>
                     <ul>
-                        <li class="item" v-for="item in hotKey">
+                        <li class="item" v-for="item in hotKey" @click="addQuery(item.title)">
                             <span>{{item.title}}</span>
                         </li>
                     </ul>
