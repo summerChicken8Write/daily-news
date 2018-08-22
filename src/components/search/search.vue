@@ -69,7 +69,6 @@
                 this.offset += 10 
                 search(this.query, this.offset).then((res) => {
                     this.result = this.result.concat(res.data)
-                    console.log(this.result)
                 })
             },
             _getHotkey() {
@@ -82,6 +81,7 @@
                 this.$refs.searchResult.scrollTo(0, 0)
                 search(this.query, this.offset).then((res) => {
                     this.result = res.data
+                    console.log(this.result)
                 })
                 if (this.query == '') {
                     return

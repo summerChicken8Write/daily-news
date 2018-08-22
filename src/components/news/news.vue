@@ -65,7 +65,7 @@
             },
             selectNews(item) {
                 this.$router.push({
-                    path: `/news/${item.item_id}`
+                    path: `/news/${item.group_id}`
                 })
                 this.setNews(item)
             },

@@ -13,7 +13,7 @@
                             <h2 class="source">{{mediaInfo.screen_name}}</h2>
                         </div>
                         <div class="comments">{{newsData.comment_count}}评论</div>
-                        <div class="keyWords" v-for="item in keyWords">
+                        <div class="keyWords" v-for="item in keyWords" v-show="keyWords.length">
                             <span class="item">{{item}}</span>
                         </div>
                     </div>
@@ -56,15 +56,18 @@
                 this.$router.back()
             },
             _getNewsDetail() {
-                if (!this.news.item_id) {
+                console.log(this.news)
+                if (!this.news.group_id) {
                     this.$router.push({
                         path: `/${this.routerBack}`
                     })
                 }
-                getNewsDetail(this.news.item_id).then((res) => {
+                getNewsDetail(this.news.group_id).then((res) => {
                     this.newsData = res.data
                     this.mediaInfo = res.data.media_user
-                    this.keyWords = this._normalizeKeyWords(this.news.keywords)
+                    if (this.news.keywords) {
+                       this.keyWords = this._normalizeKeyWords(this.news.keywords)
+                    }
                     console.log(this.newsData)
                 })
             },
