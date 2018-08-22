@@ -22,8 +22,9 @@
                 </div>
             </div>
             <scroll class="search-result" ref="searchResult" v-show="query" :data="result" :pullup="pullup" @scrollToEnd="searchMore">
-                <news-list :allNews="result"></news-list>
+                <news-list :allNews="result" @select="selectNews"></news-list>
             </scroll>
+            <router-view :routerBack="routerBack"></router-view>
         </div>
     </transition>
 </template>
@@ -35,7 +36,7 @@
     import NewsList from 'components/news-list/news-list'
     import Scroll from 'base/scroll/scroll'
     import SearchList from 'base/search-list/search-list'
-    import {mapGetters, mapActions} from 'vuex'
+    import {mapGetters, mapActions, mapMutations} from 'vuex'
 
     export default {
         data() {
@@ -45,6 +46,7 @@
                 result: [],
                 offset: 0,
                 pullup: true,
+                routerBack: 'search'
             }
         },
         computed: {
@@ -71,6 +73,12 @@
                     this.result = this.result.concat(res.data)
                 })
             },
+            selectNews(item) {
+                this.$router.push({
+                    path: `/search/${item.group_id}`
+                })
+                this.setNews(item)
+            },
             _getHotkey() {
                 getHotKey().then((res) => {
                     this.hotKey = res.data
@@ -92,6 +100,9 @@
                 'saveSearchHistory',
                 'deleteSearchHistory'
             ]),
+            ...mapMutations({
+                setNews: 'SET_NEWS'
+            })
         },
         watch: {
             query(newQuery) {

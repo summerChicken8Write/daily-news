@@ -56,7 +56,6 @@
                 this.$router.back()
             },
             _getNewsDetail() {
-                console.log(this.news)
                 if (!this.news.group_id) {
                     this.$router.push({
                         path: `/${this.routerBack}`
@@ -66,9 +65,8 @@
                     this.newsData = res.data
                     this.mediaInfo = res.data.media_user
                     if (this.news.keywords) {
-                       this.keyWords = this._normalizeKeyWords(this.news.keywords)
+                        this.keyWords = this._normalizeKeyWords(this.news.keywords)
                     }
-                    console.log(this.newsData)
                 })
             },
             _normalizeKeyWords(str) {
