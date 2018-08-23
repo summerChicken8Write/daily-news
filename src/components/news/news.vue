@@ -52,7 +52,7 @@
             this._getRollNews()
             // setTimeout(() => {
             //     this._getAllNews()
-            // }, 5000)
+            // }, 200)
             this._getAllNews()
         },
         methods: {

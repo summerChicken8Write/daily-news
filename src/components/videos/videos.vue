@@ -37,6 +37,9 @@
             }
         },
         created() {
+            // setTimeout(() => {
+            //     this._getVideos()
+            // }, 200)
             this._getVideos()
         },
         methods: {

@@ -1,7 +1,7 @@
 <template>
     <transition name="slider">
         <div class="news-detail">
-            <scroll :data="newsData" class="news-content">
+            <scroll :data="newsData" class="news-content" :pullup="pullup" ref="newsData" @scrollToEnd="refreshScroll">
                 <div>
                     <div class="news-header">
                         <div class="top">
@@ -40,7 +40,8 @@
             return {
                 newsData: {},
                 mediaInfo: '',
-                keyWords: ''
+                keyWords: '',
+                pullup: true
             }
         },
         created() {
@@ -61,6 +62,9 @@
             back() {
                 this.$router.back()
             },
+            refreshScroll() {
+                this.$refs.newsData.refresh()
+            },
             _getNewsDetail() {
                 if (!this.news.group_id) {
                     this.$router.push({
@@ -69,7 +73,6 @@
                 }
                 getNewsDetail(this.news.group_id).then((res) => {
                     this.newsData = res.data
-                    console.log(this.news.datetime)
                     this.mediaInfo = res.data.media_user
                     if (this.news.keywords) {
                         this.keyWords = this._normalizeKeyWords(this.news.keywords)
@@ -166,5 +169,10 @@
                     margin-bottom 20px
                 img
                     width 100%
+        .loading-container
+            position: absolute
+            width: 100%
+            top: 50%
+            transform: translateY(-50%)
 </style>
 
