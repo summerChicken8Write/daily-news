@@ -145,6 +145,8 @@
                     top 22px
                     left 22px
                     font-size $font-size-title
+                .title
+                    font-size $font-size-title-l
             .search-wrapper
                 height 40px
                 margin-bottom 20px
