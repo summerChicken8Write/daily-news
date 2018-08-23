@@ -65,6 +65,9 @@
         created() {
             this._getHotkey()
         },
+        destroyed() {       //组件生命周期结束时，将query清空
+            this.query = ''
+        },
         methods: {
             back() {
                 this.$router.back()
