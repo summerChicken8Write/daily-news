@@ -49,8 +49,8 @@
             text-align center
             font-size $font-size-title
         .search-item
-            height 25px
-            line-height 25px
+            height 30px
+            line-height 30px
             font-size $font-size-text
             &.move-enter-active, &.move-leave-active
                 transition all 0.3s
@@ -63,5 +63,6 @@
                 line-height 25px
         .clear
             margin-top 20px
+            padding-bottom 30px
             text-align center
 </style>

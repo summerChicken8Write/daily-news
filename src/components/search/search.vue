@@ -9,17 +9,21 @@
                 <search-box @query="onQueryChange" @search="_search" ref="searchBox"></search-box>
             </div>
             <div class="shortcut-wrapper" v-show="!query">
-                <div class="hot-key">
-                    <h1 class="title">热门搜索：</h1>
-                    <ul>
-                        <li class="item" v-for="item in hotKey" @click="addQuery(item.title)">
-                            <span>{{item.title}}</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="search-history">
-                    <search-list :searchHistory="searchHistory" @select="addQuery" @delete="deleteSearchHistory"></search-list>
-                </div>
+                <scroll class="shoutcut" :data="shortcut" :refreshDelay="refreshDelay">
+                    <div>
+                        <div class="hot-key">
+                            <h1 class="title">热门搜索：</h1>
+                            <ul>
+                                <li class="item" v-for="item in hotKey" @click="addQuery(item.title)">
+                                    <span>{{item.title}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="search-history">
+                            <search-list :searchHistory="searchHistory" @select="addQuery" @delete="deleteSearchHistory"></search-list>
+                        </div>
+                    </div>
+                </scroll>
             </div>
             <scroll class="search-result" ref="searchResult" v-show="query" :data="result" :pullup="pullup" @scrollToEnd="searchMore">
                 <news-list :allNews="result" @select="selectNews"></news-list>
@@ -46,10 +50,14 @@
                 result: [],
                 offset: 0,
                 pullup: true,
-                routerBack: 'search'
+                routerBack: 'search',
+                refreshDelay: 100
             }
         },
         computed: {
+            shortcut() {
+                return this.hotKey.concat(this.searchHistory)
+            },
             ...mapGetters([
                 'searchHistory'
             ])
@@ -153,21 +161,28 @@
                 line-height 40px
                 background $color-background-g
             .shortcut-wrapper
-                .hot-key
-                    margin 15px 7px
-                    text-align center
-                    .title
-                        margin-bottom 10px
-                        font-size $font-size-title
-                    .item
-                        display inline-block
-                        margin-right 6px
-                        margin-bottom 15px
-                        padding 6px 5px
-                        background $color-border
-                        font-size $font-size-text
-                .search-history
-                    margin 0 25px
+                position: fixed
+                top: 120px
+                bottom: 0
+                width: 100%
+                .shoutcut
+                    height 100%
+                    overflow hidden
+                    .hot-key
+                        margin 15px 7px
+                        text-align center
+                        .title
+                            margin-bottom 10px
+                            font-size $font-size-title
+                        .item
+                            display inline-block
+                            margin-right 6px
+                            margin-bottom 15px
+                            padding 6px 5px
+                            background $color-border
+                            font-size $font-size-text
+                    .search-history
+                        margin 0 25px
             .search-result
                 height 100%
                 overflow hidden
