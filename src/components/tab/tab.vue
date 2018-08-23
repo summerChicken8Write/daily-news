@@ -94,9 +94,6 @@
         background $color-border
         .tab-item
             flex 1
-            border-right 1px solid $color-desc
-            &:last-child
-                border-right none
             .tab-link
                 position relative
                 padding-bottom 5px
