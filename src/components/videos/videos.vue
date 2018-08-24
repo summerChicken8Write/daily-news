@@ -4,7 +4,7 @@
             <div>
                 <div class="videos-item" v-for="item in videos">
                     <div class="title">
-                        <h1>{{item.title}}</h1>
+                        <a :href="item.url">{{item.title}}</a>
                     </div>
                     <span class="icon"></span>
                     <div class="image-wrapper">
@@ -56,6 +56,7 @@
             _getVideos() {
                 getVideos().then((res) =>{
                     this.videos = res.data
+                    console.log(this.videos[0].url)
                 })
             },
         },
@@ -91,6 +92,8 @@
                     color $color-title
                     font-size $font-size-title
                     background linear-gradient(to bottom, rgba(7, 17, 27, 0.75), rgba(7, 17, 27, 0.05))
+                    a
+                        color $color-title
                 // 制作一个带边框的三角形图标
                 .icon
                     position absolute
