@@ -3,7 +3,7 @@
         <div class="message">
             <i class="icon icon-user-tie"></i>
         </div>
-        <div class="title">
+        <div class="title" @click="refresh">
             <h1 class="text">每日新闻</h1>
             <i class="icon icon-spinner11"></i>
         </div>
@@ -18,6 +18,10 @@
         methods: {
             toSearch() {
                 this.$router.push({path:'/search'})
+            },
+            refresh() {
+                this.$router.push({path:'/news'})
+                window.location.reload()
             }
         }
     }
