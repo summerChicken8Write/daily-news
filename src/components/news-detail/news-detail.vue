@@ -26,6 +26,7 @@
                     <div class="content" v-html="newsData.content"></div>
                 </div>
             </scroll>
+            <top @top="top"></top>
         </div>
     </transition>
 </template>
@@ -34,6 +35,7 @@
     import {mapGetters} from 'vuex'
     import {getNewsDetail} from 'api/getNews'
     import Scroll from 'base/scroll/scroll'
+    import Top from 'base/top/top'
 
     export default {
         data() {
@@ -65,6 +67,9 @@
             refreshScroll() {
                 this.$refs.newsData.refresh()
             },
+            top() {
+                this.$refs.newsData.scrollTo(0, 0, 300)
+            },
             _getNewsDetail() {
                 if (!this.news.group_id) {
                     this.$router.push({
@@ -84,7 +89,8 @@
             }
         },
         components: {
-            Scroll
+            Scroll,
+            Top
         }
     }
 </script>
