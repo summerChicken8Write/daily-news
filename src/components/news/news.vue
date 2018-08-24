@@ -22,6 +22,9 @@
                 </div>
             </div>
         </scroll>
+        <tip ref="tip">
+            <p>已为您加载热门新闻</p>
+        </tip>
         <div class="loading-container" v-show="!allNews.length">
             <loading></loading>
         </div>
@@ -36,6 +39,7 @@
     import Loading from 'base/loading/loading'
     import NewsList from 'components/news-list/news-list'
     import {mapMutations} from 'vuex'
+    import Tip from 'base/tip/tip'
 
     const SUCCESS = 'success'
 
@@ -74,6 +78,7 @@
                 getAllNews(this.offset).then((res) => {
                     this.allNews = this.allNews.concat(res.data)
                 })
+                this.$refs.tip.show()
             },
             _getRollNews() {
                 getRollNews().then((res) => {
@@ -97,7 +102,8 @@
             Slider,
             NewsList,
             Scroll,
-            Loading
+            Loading,
+            Tip
         },
     }
 </script>

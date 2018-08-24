@@ -18,6 +18,9 @@
                 <loading title=""></loading>
             </div>
         </scroll>
+        <tip ref="tip">
+            <p>已为您加载新鲜视频</p>
+        </tip>
         <div class="loading-container" v-show="!videos.length">
             <loading></loading>
         </div>
@@ -28,6 +31,7 @@
     import {getVideos} from 'api/getVideos'
     import Scroll from 'base/scroll/scroll'
     import Loading from 'base/loading/loading'
+    import Tip from 'base/tip/tip'
 
     export default {
         data() {
@@ -47,6 +51,7 @@
                 getVideos().then((res) => {
                     this.videos = this.videos.concat(res.data)
                 })
+                this.$refs.tip.show()
             },
             _getVideos() {
                 getVideos().then((res) =>{
@@ -56,7 +61,8 @@
         },
         components: {
             Scroll,
-            Loading
+            Loading,
+            Tip
         },
     }
 </script>

@@ -28,6 +28,9 @@
             <scroll class="search-result" ref="searchResult" v-show="query" :data="result" :pullup="pullup" @scrollToEnd="searchMore">
                 <news-list :allNews="result" @select="selectNews"></news-list>
             </scroll>
+            <tip ref="tip">
+                <p>已为您加载更多搜索结果</p>
+            </tip>
             <router-view :routerBack="routerBack"></router-view>
         </div>
     </transition>
@@ -41,6 +44,7 @@
     import Scroll from 'base/scroll/scroll'
     import SearchList from 'base/search-list/search-list'
     import {mapGetters, mapActions, mapMutations} from 'vuex'
+    import Tip from 'base/tip/tip'
 
     export default {
         data() {
@@ -80,6 +84,7 @@
                 search(this.query, this.offset).then((res) => {
                     this.result = this.result.concat(res.data)
                 })
+                this.$refs.tip.show()
             },
             selectNews(item) {
                 this.$router.push({
@@ -121,7 +126,8 @@
             SearchBox,
             NewsList,
             Scroll,
-            SearchList
+            SearchList,
+            Tip
         },
     }
 </script>
