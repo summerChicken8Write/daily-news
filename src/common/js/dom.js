@@ -15,31 +15,31 @@ export function hasClass (el, className) {
 let elementStyle = document.createElement('div').style
 
 let vender = (() => {
-	let transformNames = {
-		webkit: 'webkitTransform',
-		Moz: 'MozTransform',
-		o: 'OTransform',
-		ms: 'msTransform',
-		standard: 'transform',
-	}
+  let transformNames = {
+    webkit: 'webkitTransform',
+    Moz: 'MozTransform',
+    o: 'OTransform',
+    ms: 'msTransform',
+    standard: 'transform'
+  }
 
-	for (let key in transformNames) {
-		if (elementStyle[transformNames[key]] !== undefined) {
-			return key
-		}
-	}
+  for (let key in transformNames) {
+    if (elementStyle[transformNames[key]] !== undefined) {
+      return key
+    }
+  }
 
-	return false
+  return false
 })()
 
-export function prefixStyle(style) {
-	if (vender === false) {
-		return false
-	}
+export function prefixStyle (style) {
+  if (vender === false) {
+    return false
+  }
 
-	if (vender === 'standard') {
-		return style
-	}
+  if (vender === 'standard') {
+    return style
+  }
 
-	return vender + style.charAt(0).toUpperCase() + style.substr(1)
+  return vender + style.charAt(0).toUpperCase() + style.substr(1)
 }
