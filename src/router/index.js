@@ -4,7 +4,6 @@ import News from 'components/news/news'
 import Videos from 'components/videos/videos'
 import Search from 'components/search/search'
 import NewsDetail from 'components/news-detail/news-detail'
-import Menu from 'components/menu/menu'
 
 Vue.use(Router)
 
@@ -40,11 +39,6 @@ export default new Router({
           component: NewsDetail
         }
       ]
-    },
-    {
-      path: '/menu',
-      name: 'menu',
-      component: Menu
     }
   ],
   linkActiveClass: 'active',

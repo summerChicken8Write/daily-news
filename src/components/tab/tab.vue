@@ -88,11 +88,9 @@
                 const VIDEOS = 'videos'
                 const x = window.innerWidth / 2
                 if (this.$route.name === NEWS) {
-                    console.log(`this router is '${this.$route.name}'`)
                     this.$refs.activeLine.style[transform] = `translate3d(0, 0, 0)`
                 }
                 if (this.$route.name === VIDEOS) {
-                    console.log(`this router is '${this.$route.name}'`)
                     this.$refs.activeLine.style[transform] = `translate3d(${x}px, 0, 0)`
                 }
             },
