@@ -56,7 +56,6 @@
             _getVideos() {
                 getVideos().then((res) =>{
                     this.videos = res.data
-                    console.log(this.videos[0].url)
                 })
             },
         },

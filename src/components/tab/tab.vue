@@ -16,8 +16,14 @@
 
 <script>
     import animations from 'create-keyframe-animation'
+    import {prefixStyle} from 'common/js/dom'
+
+    const transform = prefixStyle('transform')
 
     export default {
+        mounted() {
+            this._checkRouter()
+        },
         methods: {
             moveToVideo(el, done) {
                 //跳转路由
@@ -61,9 +67,6 @@
                     0: {
                         transform: `translate3d(${x}px, 0, 0) scaleX(1)`
                     },
-                    50: {
-                        transform: `translate3d(${x / 2}px, 0, 0) scaleX(0.2)`
-                    },
                     100: {
                         transform: `translate3d(0, 0, 0) scaleX(1)`
                     },
@@ -79,6 +82,19 @@
                 })
 
                 animations.runAnimation(this.$refs.activeLine, 'moveToNews', done)
+            },
+            _checkRouter(el, done) {
+                const NEWS = 'news'
+                const VIDEOS = 'videos'
+                const x = window.innerWidth / 2
+                if (this.$route.name === NEWS) {
+                    console.log(`this router is '${this.$route.name}'`)
+                    this.$refs.activeLine.style[transform] = `translate3d(0, 0, 0)`
+                }
+                if (this.$route.name === VIDEOS) {
+                    console.log(`this router is '${this.$route.name}'`)
+                    this.$refs.activeLine.style[transform] = `translate3d(${x}px, 0, 0)`
+                }
             },
         },
     }
