@@ -143,7 +143,7 @@
             position fixed
             z-index 100
             top 0
-            bottom 0
+            bottom 100px
             left 0
             right 0
             background $color-title
@@ -163,13 +163,13 @@
                     font-size $font-size-title-l
             .search-wrapper
                 height 40px
-                margin-bottom 20px
                 line-height 40px
                 background $color-background-g
             .shortcut-wrapper
                 position: fixed
-                top: 120px
+                top: 100px
                 bottom: 0
+                padding-top 20px
                 width: 100%
                 .shoutcut
                     height 100%
