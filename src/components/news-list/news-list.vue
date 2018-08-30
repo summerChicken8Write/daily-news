@@ -19,7 +19,7 @@
                     <img v-lazy="item.image_url">
                 </div>
             </div>
-            <loading title=""></loading>
+            <loading title="" v-show="showLoading"></loading>
         </div>
     </div>
 </template>
@@ -37,6 +37,10 @@
             allNews: {
                 type: Array,
                 default: [],
+            },
+            showLoading: {
+                type: Boolean,
+                default: true
             }
         },
         methods: {
@@ -58,8 +62,8 @@
         .news-content
             .news-item
                 display flex
-                margin 20px 10px 0px 10px
-                padding-bottom 20px
+                margin 0 10px
+                padding 20px 0
                 border-bottom 1px solid $color-border
                 .content
                     flex 1
