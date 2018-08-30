@@ -4,6 +4,7 @@ import News from 'components/news/news'
 import Videos from 'components/videos/videos'
 import Search from 'components/search/search'
 import NewsDetail from 'components/news-detail/news-detail'
+import Collection from 'components/collection/collection'
 
 Vue.use(Router)
 
@@ -33,6 +34,17 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: Search,
+      children: [
+        {
+          path: ':id',
+          component: NewsDetail
+        }
+      ]
+    },
+    {
+      path: '/collection',
+      name: 'collection',
+      component: Collection,
       children: [
         {
           path: ':id',

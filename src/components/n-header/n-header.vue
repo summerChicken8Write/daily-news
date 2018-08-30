@@ -1,7 +1,7 @@
 <template>
     <div class="n-header">
         <div class="message">
-            <i class="icon icon-user-tie"></i>
+            <i class="icon icon-star-empty" @click="toCollection"></i>
         </div>
         <div class="title" @click="refresh">
             <h1 class="text">每日新闻</h1>
@@ -16,6 +16,9 @@
 <script>
     export default {
         methods: {
+            toCollection() {
+                this.$router.push({path:'/collection'})
+            },
             toSearch() {
                 this.$router.push({path:'/search'})
             },
