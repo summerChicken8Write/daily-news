@@ -7,9 +7,9 @@
                         <div v-for="item in hotSpot">
                             <div class="title-wrapper">
                                 <h1 class="title">
-                                    <span href="">
+                                    <a :href="commonUrl + item.display_url">
                                         {{item.title}}
-                                    </span>
+                                    </a>
                                 </h1>
                             </div>
                             <!-- 轮播图的高度由图片撑开，在图片加载完成之后调用refresh方法 -->
@@ -49,7 +49,8 @@
                 hotSpot: [],
                 allNews: [],
                 pullup: true,
-                offset: 0
+                offset: 0,
+                commonUrl: 'http://m.toutiao.com'
             }
         },
         created() {
@@ -85,7 +86,7 @@
                 getRollNews().then((res) => {
                     if(res.message === SUCCESS) {
                         this.hotSpot = res.data.pc_feed_focus
-                        // console.log(this.hotSpot)
+                        console.log(this.hotSpot)
                     }
                 })
             },
@@ -138,6 +139,8 @@
                         text-align right
                         overflow hidden
                         text-overflow ellipsis
+                    a
+                        color $color-text
         .loading-container
             position: absolute
             width: 100%
