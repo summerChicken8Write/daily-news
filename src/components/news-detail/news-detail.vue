@@ -22,6 +22,16 @@
                                 <li class="item" v-for="item in keyWords">{{item}}</li>
                             </ul>
                         </div>
+                        <div class="collection">
+                            <div class="noFavorite" v-show="!isFavorite()" @click="toggleFavorite">
+                                <span class="icon icon-star-empty"></span>
+                                <span class="text">&nbsp&nbsp&nbsp收藏</span>
+                            </div>
+                            <div class="isFavorite" v-show="isFavorite()" @click="toggleFavorite">
+                                <span class="icon icon-star-full"></span>
+                                <span class="text">已收藏</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="content" v-html="newsData.content"></div>
                 </div>
@@ -32,7 +42,7 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
+    import {mapGetters, mapActions} from 'vuex'
     import {getNewsDetail} from 'api/getNews'
     import Scroll from 'base/scroll/scroll'
     import Top from 'base/top/top'
@@ -57,7 +67,8 @@
         },
         computed: {
             ...mapGetters([
-                'news'
+                'news',
+                'favoriteList'
             ])
         },
         methods: {
@@ -69,6 +80,20 @@
             },
             top() {
                 this.$refs.newsData.scrollTo(0, 0, 300)
+            },
+            toggleFavorite() {
+                if (this.isFavorite()) {
+                    this.deleteFavoriteList(this.news)
+                }
+                else {
+                    this.saveFavoriteList(this.news)
+                }
+            },
+            isFavorite() {
+                const index = this.favoriteList.findIndex((item) => {
+                    return item.group_id === this.news.group_id
+                })
+                return index > -1
             },
             _getNewsDetail() {
                 if (!this.news.group_id) {
@@ -86,12 +111,16 @@
             },
             _normalizeKeyWords(str) {
                 return str.split(",")
-            }
+            },
+            ...mapActions([
+                'saveFavoriteList',
+                'deleteFavoriteList'
+            ])
         },
         components: {
             Scroll,
             Top
-        }
+        },
     }
 </script>
 
@@ -135,7 +164,7 @@
                     font-size $font-size-title-l
                     font-weight 700
             .desc
-                margin 30px 15px
+                margin 30px 15px 0
                 .media
                     display inline-block
                     height 25px
@@ -164,6 +193,13 @@
                         .item
                             margin-right 5px
                             display inline-block
+                            color $color-desc
+                .collection
+                    margin-top 10px
+                    .isFavorite
+                        .icon-star-full
+                            color $color-isFavorite
+                        .text
                             color $color-desc
             .content
                 padding 30px 15px

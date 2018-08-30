@@ -54,6 +54,7 @@
         },
         created() {
             this._getRollNews()
+            console.log(this.hotSpot)
             // setTimeout(() => {
             //     this._getAllNews()
             // }, 200)
@@ -92,6 +93,7 @@
                 this.offset = 0
                 getAllNews(this.offset).then((res) => {
                     this.allNews = res.data
+                    // console.log(this.allNews)
                 })
             },
             ...mapMutations({

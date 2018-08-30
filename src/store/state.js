@@ -1,8 +1,9 @@
-import {loadSearch} from 'common/js/cache'
+import {loadSearch, loadFavorite} from 'common/js/cache'
 
 const state = {
   searchHistory: loadSearch(),
-  news: {}
+  news: {},
+  favoriteList: loadFavorite()
 }
 
 export default state

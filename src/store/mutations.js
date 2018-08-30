@@ -6,6 +6,9 @@ const mutations = {
   },
   [types.SET_NEWS] (state, news) {
     state.news = news
+  },
+  [types.SET_FAVORITE_LIST] (state, list) {
+    state.favoriteList = list
   }
 }
 
