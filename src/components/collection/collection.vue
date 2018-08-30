@@ -5,6 +5,9 @@
                 <i class="icon icon-arrow_lift" @click="back"></i>
                 <h1 class="title">我的收藏</h1>
             </div>
+            <div class="desc" v-show="!favoriteList.length">
+                <span>暂无收藏</span>
+            </div>
             <scroll class="collection-list" ref="collectionList" v-show="favoriteList" :data="favoriteList">
                 <news-list :allNews="favoriteList" :showLoading="showLoading" @select="selectNews"></news-list>
             </scroll>
@@ -78,7 +81,13 @@
                     left 22px
                     font-size $font-size-title
                 .title
-                    font-size $font-size-title-l        
+                    font-size $font-size-title-l     
+            .desc
+                position: absolute
+                width: 100%
+                top: 50%
+                transform: translateY(-50%)
+                text-align center
             .collection-list
                 height 100%
                 overflow hidden    
