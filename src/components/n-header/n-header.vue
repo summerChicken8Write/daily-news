@@ -1,7 +1,7 @@
 <template>
     <div class="n-header">
         <div class="message">
-            <i class="icon icon-user-tie"></i>
+            <i class="icon icon-user-tie" @click="toMenu"></i>
         </div>
         <div class="title" @click="refresh">
             <h1 class="text">每日新闻</h1>
@@ -16,6 +16,9 @@
 <script>
     export default {
         methods: {
+            toMenu() {
+                this.$router.push({path:'/menu'})
+            },
             toSearch() {
                 this.$router.push({path:'/search'})
             },
