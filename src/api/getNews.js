@@ -12,16 +12,6 @@ export function getRollNews () {
 export function getAllNews (offset) {
   const url = '/api/list/'
 
-  // const data = Object.assign({}, {
-  //   page_type: 1,
-  //   user_id: 5954781019,
-  //   max_behot_time: 0,
-  //   count: 10,
-  //   as: 'A125DBD64075DC1',
-  //   cp: '5B60253DDCF13E1',
-  //   _signature: 'ckTLCBAXKSclc4NTEMAfB3JEyx'
-  // })
-
   const time = parseInt((new Date().getTime()) / 1000)
 
   const data = Object.assign({}, {

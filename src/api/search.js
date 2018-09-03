@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export function getHotKey () {
-  const url = '/api/getHotKey'
+  const url = '/api/baidu_top_words/?csrfmiddlewar'
 
   return axios.get(url).then(res => {
     return Promise.resolve(res.data)
